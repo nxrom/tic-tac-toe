@@ -1,17 +1,21 @@
+import type { Board } from '../types'
 import GameTile from './GameTile'
 
-function GameBoard() {
+type GameBoardProps = {
+  board: Board
+  onClick: (index: number) => void
+}
+
+function GameBoard({ board, onClick }: GameBoardProps) {
   return (
     <div className="mt-4 grid grid-cols-3 gap-4">
-      <GameTile />
-      <GameTile />
-      <GameTile />
-      <GameTile />
-      <GameTile />
-      <GameTile />
-      <GameTile />
-      <GameTile />
-      <GameTile />
+      {board.map((value, index) => (
+        <GameTile
+          value={value}
+          key={index}
+          onClick={() => onClick(index + 1)}
+        />
+      ))}
     </div>
   )
 }
